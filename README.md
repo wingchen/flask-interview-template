@@ -1,4 +1,4 @@
-# Porject
+# Project
 
 flask-interview-template is a minimum implementation of python flask web framework with peewee orm and sqlite integration.
 
