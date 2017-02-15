@@ -14,7 +14,7 @@ class BaseModel(Model):
 
 class User(BaseModel):
     uuid = UUIDField(primary_key=True)
-    username = CharField(unique=True)
+    username = CharField(unique=True, index=True)
     password = CharField()
     creation = DateTimeField(default=datetime.datetime.utcnow)
     last_login = DateTimeField(null=True)
@@ -39,7 +39,7 @@ class User(BaseModel):
 TABLE_LIST = [User]
 
 def init_db():
-    database.create_tables(TABLE_LIST)
+    database.create_tables(TABLE_LIST, safe=False)
 
     # initialized develop database
     develop = User()
@@ -49,4 +49,6 @@ def init_db():
     develop.save(force_insert=True)
 
 def drop_db():
-    database.drop_tables(TABLE_LIST)
+    for table in TABLE_LIST:
+        print('dropping table: {}'.format(table))
+        database.drop_table(table, fail_silently=True)
