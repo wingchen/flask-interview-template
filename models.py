@@ -39,7 +39,7 @@ class User(BaseModel):
 TABLE_LIST = [User]
 
 def init_db():
-    database.create_tables(TABLE_LIST, safe=False)
+    database.create_tables(TABLE_LIST)
 
     # initialized develop database
     develop = User()
